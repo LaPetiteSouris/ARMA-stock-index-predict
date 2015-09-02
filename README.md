@@ -14,7 +14,8 @@ UNIX environment. <br />
 Anaconda 2.3.0
 <br />
 
-The project uses extensively several Python data analysis and machine learning library, including Pandas, SciPy, Scikit-learn and Matplotlib for plotting result
+The project uses extensively several Python data analysis and machine learning libraries, including Pandas, SciPy, Scikit-learn and Matplotlib for plotting result.
+Most of these libraries are ready-installed with Anaconda, or can be easily install with Anaconda tool
 
 #Design : 
 
