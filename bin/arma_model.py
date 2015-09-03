@@ -9,30 +9,21 @@ class ARMA:
         self._data = data
 
     def start_modeling(self):
-        arma_model_array = self.construct_arma_array()
-        best_arma_model = self.find_optimal_model(arma_model_array)
-        return best_arma_model
+        best_arma_order = self.find_optimal_model_order(self._data)
+        arma_model = self.fit_models(best_arma_order)
+        print 'Optimal ARMA order(p,q) is: '
+        print best_arma_order
+        return arma_model
 
-    def construct_arma_array(self):
-        arma_array = []
-        for p in range(0, 10):
-            for q in range(0, 10):
-                arma = self.fit_models(p, q)
-                arma_array.append(arma)
-        return arma_array
-        # fit data into an ARMA model with order (p,q)
+    # fit data into an ARMA model with order (p,q)
 
-    def fit_models(self, p, q):
-        arma = sm.tsa.ARMA(self._data, (p, q)).fit(disp=0)
+    def fit_models(self, res):
+        arma = sm.tsa.ARMA(self._data, res).fit(disp=0)
         return arma
 
     # Return the optimal ARMA model based on finding min of AIC
-    def find_optimal_model(self, arma_array):
-        # cosntruct an array of AIC from ARMA models
-        aic_list = []
-        for arma_model in arma_array:
-            aic_list.append(arma_model.aic)
-        aic_list_np = np.array(aic_list)
-        min_index = aic_list_np.argmin()
-        # return index of aic min in the array
-        return arma_array[min_index]
+    def find_optimal_model_order(self, data):
+        p = 5
+        q = 5
+        residual = sm.tsa.stattools.arma_order_select_ic(data, p, q, ic='aic', trend='nc')
+        return residual.aic_min_order
