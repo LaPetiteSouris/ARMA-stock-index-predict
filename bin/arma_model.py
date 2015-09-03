@@ -23,8 +23,7 @@ class ARMA:
         # fit data into an ARMA model with order (p,q)
 
     def fit_models(self, p, q):
-        arma = sm.tsa.ARMA(self._data, (4, 0)).fit(disp=0)
-        aic = arma.aic
+        arma = sm.tsa.ARMA(self._data, (p, q)).fit(disp=0)
         return arma
 
     # Return the optimal ARMA model based on finding min of AIC
