@@ -1,7 +1,7 @@
 __author__ = 'tung'
 
 import statsmodels.api as sm
-import numpy as np
+
 
 
 class ARMA:
@@ -27,3 +27,9 @@ class ARMA:
         q = 5
         residual = sm.tsa.stattools.arma_order_select_ic(self._data, p, q, ic='aic', trend='nc')
         return residual.aic_min_order
+
+    # Predict stock index in the next 3 days
+    def prediction(self, arma_model):
+        lenght_data = len(self._data)
+        predicted_stock = arma_model.predict(lenght_data, lenght_data+4, dynamic="True")
+        return predicted_stock

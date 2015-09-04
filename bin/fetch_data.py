@@ -12,3 +12,11 @@ class data:
         # Adj closing point of the index
         cls_point = result.loc[:, ['Adj Close']]
         return cls_point
+
+    def convert_data_to_array(self, data):
+        length = len(data.index)
+        data_value_array = []
+        for i in range(0, length - 1):
+            data_val=data.iloc[i].values[0]
+            data_value_array.append(data_val)
+        return data_value_array
