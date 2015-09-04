@@ -9,7 +9,7 @@ class ARMA:
         self._data = data
 
     def start_modeling(self):
-        best_arma_order = self.find_optimal_model_order(self._data)
+        best_arma_order = self.find_optimal_model_order()
         arma_model = self.fit_models(best_arma_order)
         print 'Optimal ARMA order(p,q) is: '
         print best_arma_order
@@ -22,8 +22,8 @@ class ARMA:
         return arma
 
     # Return the optimal ARMA model based on finding min of AIC
-    def find_optimal_model_order(self, data):
+    def find_optimal_model_order(self):
         p = 5
         q = 5
-        residual = sm.tsa.stattools.arma_order_select_ic(data, p, q, ic='aic', trend='nc')
+        residual = sm.tsa.stattools.arma_order_select_ic(self._data, p, q, ic='aic', trend='nc')
         return residual.aic_min_order
