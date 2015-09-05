@@ -23,8 +23,8 @@ class ARMA:
 
     # Return the optimal ARMA model based on finding min of AIC
     def find_optimal_model_order(self):
-        p = 5
-        q = 5
+        p = 10
+        q = 10
         residual = sm.tsa.stattools.arma_order_select_ic(self._data, p, q, ic='aic', trend='nc')
         return residual.aic_min_order
 
