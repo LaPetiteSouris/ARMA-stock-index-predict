@@ -2,7 +2,6 @@ __author__ = 'tung'
 
 from fetch_data import data
 from arma_model import ARMA
-from save_prediction import Storage
 import datetime as date
 import matplotlib.pyplot as plt
 import statsmodels.api as sm
@@ -30,12 +29,10 @@ sm.qqplot(resid, line='q',ax=ax2, fit='True')
 # Prediction
 predicted_stock = arma_modeling_helper.prediction(arma_model)
 print predicted_stock
-
-#Save to database for comparision
-predicted_stock_next_day=predicted_stock[0]
-storage_worker=Storage()
-storage_worker.save_to_pickle(predicted_stock_next_day)
-
-
+plt.figure()
+ax=plt.plot(predicted_stock)
+plt.xlabel('Days')
+plt.ylabel('EUR')
+plt.title('Predicted Closing Price of EURONEXT 100 in next 5 business day')
 plt.grid()
 plt.show()
