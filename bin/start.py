@@ -32,7 +32,6 @@ print predicted_stock
 plt.figure()
 ax=plt.plot(predicted_stock)
 plt.xlabel('Days')
-plt.ylabel('EUR')
 plt.title('Predicted Closing Price of EURONEXT 100 in next 5 business day')
 plt.grid()
 plt.show()
